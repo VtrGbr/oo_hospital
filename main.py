@@ -21,7 +21,24 @@ class Paciente:
     def __str__(self):
         return f"Paciente: {self.nome}"
 
+'''class funcionarioSaude:
+    def __init__(self,nome,profissao, registroProfissional):
+        self.nome = nome
+        self.funcionario = []
+        self.profissao = profissao
+        self.registroProfissional = registroProfissional
+    
+    def addFuncionario(self,nome):
+        self.funcionario.append(nome)
 
+    def removerFuncionario(self):
+        self.funcionario.pop()
+    
+    def atualizarFuncionario(self):
+        #irei implementar, pois estou em duvida se faço funcionario ser uma lista ou um dicionari
+
+'''
+        
 class Hospital:
     def __init__(self):
         self.pacientes = []
