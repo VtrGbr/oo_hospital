@@ -1,14 +1,14 @@
 Hospital Management Software
 Sistema de gestão hospitalar desenvolvido em Python com Programação Orientada a Objetos (POO), permitindo o gerenciamento completo de pacientes, consultas, receitas, exames, leitos, estoque, equipe médica e emergências.
 
--- Projetando o software --
-    Possíveis objetos a serem usados:
-        - FuncionariosSaude -> Estarão contidos os(as) médicos(as) e enfermeiros(as)
-        - Médico
-        - Enfermeiro
-        - Paciente
-        - Prontuário médico
-        - Setor administrativo --> Responsável por receber queixas contra os funcionáriosSaude, organizar o faturamento do hospital e do paciente
+    Projetando o software
+        Possíveis objetos a serem usados:
+            - FuncionariosSaude -> Estarão contidos os(as) médicos(as) e enfermeiros(as)
+            - Médico
+            - Enfermeiro
+            - Paciente
+            - Prontuário médico
+            - Setor administrativo --> Responsável por receber queixas contra os funcionáriosSaude, organizar o faturamento do hospital e do paciente
 
     Possíveis atributos de cada objeto:
         - FuncionariosSaude:
@@ -58,7 +58,7 @@ Sistema de gestão hospitalar desenvolvido em Python com Programação Orientada
             1. Registrar queixa(se houver)
             2. Faturamento do hospital
             3. Faturamento do paciente
-            
+
 -- Funcionalidades pensadas para serem implantadas futuramente:
 
 1. Relatórios em PDF: Gerar um pdf com as informações do paciente
