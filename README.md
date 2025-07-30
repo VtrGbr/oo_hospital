@@ -59,11 +59,11 @@ Sistema de gestão hospitalar desenvolvido em Python com Programação Orientada
             2. Faturamento do hospital
             3. Faturamento do paciente
 
--- Funcionalidades pensadas para serem implantadas futuramente:
+- Funcionalidades pensadas para serem implantadas futuramente:
 
-1. Relatórios em PDF: Gerar um pdf com as informações do paciente
+    1. Relatórios em PDF: Gerar um pdf com as informações do paciente
 
-2. Sistema de login: paciente e funcionarioSaude            
+    2. Sistema de login: paciente e funcionarioSaude            
 
 
                    
