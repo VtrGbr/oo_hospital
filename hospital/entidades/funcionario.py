@@ -20,3 +20,6 @@ class Medico(FuncionarioSaude):
 class Enfermeiro(FuncionarioSaude):
     def __init__(self, nome, registro):
         super().__init__(nome, registro)
+
+
+

@@ -1,4 +1,4 @@
-from hospital import Hospital, Funcionario
+from hospital import Hospital
 
 def menu():
     print("\n--- SISTEMA DE GESTÃO HOSPITALAR ---")
