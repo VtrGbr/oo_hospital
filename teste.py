@@ -1,4 +1,4 @@
-class Paciente:
+'''class Paciente:
     def __init__(self, nome): #construtor
         self.nome = nome
         self.prontuario = []
@@ -236,4 +236,4 @@ while True:
                 hospital.ver_emergencias()
             em_opcao = input("Escolha: ")
     else:
-        print(" Opção inválida.")
+        print(" Opção inválida.")'''
