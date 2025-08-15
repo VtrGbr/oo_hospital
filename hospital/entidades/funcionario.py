@@ -1,7 +1,13 @@
-class FuncionarioSaude:
+from abc import ABC, abstractmethod
+
+class FuncionarioSaude(ABC):
     def __init__(self, nome, registro):
         self.nome = nome
         self.registro = registro
+
+    @abstractmethod
+    def requisitar_exame(self,paciente,exame):
+        pass
 
     def __str__(self):
         return f"{self.nome} ({self.registro})"
@@ -20,6 +26,11 @@ class Medico(FuncionarioSaude):
 class Enfermeiro(FuncionarioSaude):
     def __init__(self, nome, registro):
         super().__init__(nome, registro)
+
+    def requisitar_exame(self, paciente, exame):
+        #Por enquanto nao vai ter nada
+        pass
+    
 
 
 

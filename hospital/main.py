@@ -13,6 +13,7 @@ def menu():
     print("8  - Solicitar exame")
     print("9  - Alocar leito")
     print("10 - Escalonamento de funcionários")
+    print("11 - Queixas")
     print("0  - Sair")
 
 ''' Funções para facilitar na main'''
@@ -119,7 +120,24 @@ def solicitarExame():
         if resposta == "sim":
             cadastroPaciente(nome)
 
-
+def queixa():
+    print("\n--- Registro de queixas ---")
+    print("1 - Registrar queixa")
+    print("2 - Ver queixa")
+    print("0 - Voltar")
+    op = input("Escolha: ")
+    while op != '0':
+        if op == '1':
+            print("Registre uma queixa: ")
+            funcionario = input("Digite o nome do funcionário: ")
+            descricao = input("Descreva o ocorrido")
+            hospital.administrativo.registrar_queixa(funcionario,descricao)
+        elif op == '2':
+            hospital.administrativo.exibir_queixas()
+        else: 
+            print("Opcao inválida!")
+        print()
+        op = input("Escolha: ")
 
 # --- Execução principal ---
 if __name__ == "__main__":
@@ -160,6 +178,7 @@ if __name__ == "__main__":
 
         elif op == '10':
             escalonamento_menu(hospital)
-
+        elif op == '11':
+            queixa()
         else:
             print("Opção inválida.")
