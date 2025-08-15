@@ -88,9 +88,12 @@ def agendarConsulta():
         hospital.agendar_consulta(nome, dia, medico)
     else:
         print("Paciente não encotrado.")
-        resposta = input("Deseja cadastra-lo?")
-        if resposta == "sim":
+        resposta = input("Deseja cadastra-lo? ")
+        if resposta.lower() == "sim":
             cadastroPaciente(nome)
+            dia = input("Data da consulta (dd/mm): ")
+            medico = input("Nome do médico: ")
+            hospital.agendar_consulta(nome, dia, medico)
         
 #Função para prontuario
 def prontuarioMedico():
@@ -102,9 +105,12 @@ def prontuarioMedico():
         hospital.registrar_prontuario(nome, profissional, descricao)
     else:
         print("Paciente não encontrado")
-        resposta = input("Deseja cadastrá-lo?")
-        if resposta == "sim":
+        resposta = input("Deseja cadastrá-lo? ")
+        if resposta.lower() == "sim":
             cadastroPaciente(nome)
+            profissional = input("Nome do profissional de saúde: ")
+            descricao = input("Descrição do prontuário: ")
+            hospital.registrar_prontuario(nome, profissional, descricao)
 
 #Solicitação de exame
 def solicitarExame():
@@ -116,9 +122,11 @@ def solicitarExame():
         hospital.solicitar_exame(nome, exame)
     else:
         print("Paciente não encontrado")
-        resposta = input("Deseja cadastrá-lo?")
-        if resposta == "sim":
+        resposta = input("Deseja cadastrá-lo? ")
+        if resposta.lower() == "sim":
             cadastroPaciente(nome)
+            exame = input("Exame a solicitar: ")
+            hospital.solicitar_exame(nome, exame)
 
 def queixa():
     print("\n--- Registro de queixas ---")

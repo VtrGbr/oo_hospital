@@ -7,7 +7,7 @@ PRECO = 10.5
 class Hospital:
     def __init__(self):
         self.pacientes = []
-        self.funcionarios = []
+        self.funcionarios = [] #chamar a classe funcionario
         self.leitos = []
         self.escalonamento = {}
         self.estoque = Estoque()
@@ -25,10 +25,10 @@ class Hospital:
                 return p
         return None
 
-    def agendar_consulta(self, nome, dia, medico):
+    def agendar_consulta(self, nome, dia, profissional):
         paciente = self.encontrar_paciente(nome)
         if paciente:
-            paciente.agendar_consulta(dia, medico)
+            paciente.agendar_consulta(dia, profissional)
             print("Consulta agendada.")
         else:
             print("Paciente não encontrado.")
