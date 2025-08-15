@@ -182,3 +182,4 @@ if __name__ == "__main__":
             queixa()
         else:
             print("Opção inválida.")
+           
