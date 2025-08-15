@@ -4,3 +4,5 @@ Main:
         1. CadastroPaciente
         2. ProntuarioMedico
         3. SolicitarExame
+Colocar lower para as opções de escolha e tirar o espaçamento
+Fazer encapsulamento no cpf e sus para definir o tamnho padrao de caracter (setter) e se o cpf e o sus estiver repetido

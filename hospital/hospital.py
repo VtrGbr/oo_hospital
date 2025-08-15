@@ -3,6 +3,7 @@ from entidades.estoque import Estoque
 from entidades.administrativo import SetorAdministrativo
 from entidades.emergencia import EmergenciaManager
 
+PRECO = 10.5
 class Hospital:
     def __init__(self):
         self.pacientes = []
@@ -43,7 +44,7 @@ class Hospital:
     def faturar_paciente(self, nome):
         paciente = self.encontrar_paciente(nome)
         if paciente:
-            total = len(paciente.consultas) * 10.5 + len(paciente.exames) * 10.5
+            total = len(paciente.consultas) * PRECO + len(paciente.exames) * PRECO
             print(f"Fatura para {paciente.nome}: R$ {total:.2f}")
         else:
             print("Paciente não encontrado.")
