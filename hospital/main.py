@@ -1,5 +1,6 @@
 from hospital import Hospital
 
+hospital = Hospital()
 def menu():
     print("\n--- SISTEMA DE GESTÃO HOSPITALAR ---")
     print("1  - Cadastrar paciente")
@@ -14,7 +15,7 @@ def menu():
     print("10 - Escalonamento de funcionários")
     print("0  - Sair")
 
-
+''' Funções para facilitar na main'''
 def estoque_menu(hospital):
     print("\n--- ESTOQUE ---")
     print("1 - Adicionar item")
@@ -68,10 +69,61 @@ def escalonamento_menu(hospital):
             print("Opção inválida.")
         op = input("Escolha: ")
 
+
+
+#funcao para cadastro
+def cadastroPaciente(nome):
+    cpf = input("CPF (ou Enter se não tiver): ") or None
+    sus = input("Cartão SUS (ou Enter se não tiver): ") or None
+    hospital.cadastrar_paciente(nome, cpf, sus)
+
+#Funcao para agendamento
+def agendarConsulta():
+    nome = input("Nome do paciente: ")
+    paciente = hospital.encontrar_paciente(nome)
+    if paciente:
+        dia = input("Data da consulta (dd/mm): ")
+        medico = input("Nome do médico: ")
+        hospital.agendar_consulta(nome, dia, medico)
+    else:
+        print("Paciente não encotrado.")
+        resposta = input("Deseja cadastra-lo?")
+        if resposta == "sim":
+            cadastroPaciente(nome)
+        
+#Função para prontuario
+def prontuarioMedico():
+    nome = input("Nome do paciente: ")
+    paciente = hospital.encontrar_paciente(nome)
+    if paciente:
+        profissional = input("Nome do profissional de saúde: ")
+        descricao = input("Descrição do prontuário: ")
+        hospital.registrar_prontuario(nome, profissional, descricao)
+    else:
+        print("Paciente não encontrado")
+        resposta = input("Deseja cadastrá-lo?")
+        if resposta == "sim":
+            cadastroPaciente(nome)
+
+#Solicitação de exame
+def solicitarExame():
+    nome = input("Nome do paciente: ")
+    paciente = hospital.encontrar_paciente(nome)
+
+    if paciente:
+        exame = input("Exame a solicitar: ")
+        hospital.solicitar_exame(nome, exame)
+    else:
+        print("Paciente não encontrado")
+        resposta = input("Deseja cadastrá-lo?")
+        if resposta == "sim":
+            cadastroPaciente(nome)
+
+
+
 # --- Execução principal ---
 if __name__ == "__main__":
-    hospital = Hospital()
-
+    #hospital = Hospital()
     while True:
         menu()
         op = input("Escolha uma opção: ")
@@ -81,22 +133,14 @@ if __name__ == "__main__":
             break
 
         elif op == '1':
-            nome = input("Nome: ")
-            cpf = input("CPF (ou Enter se não tiver): ") or None
-            sus = input("Cartão SUS (ou Enter se não tiver): ") or None
-            hospital.cadastrar_paciente(nome, cpf, sus)
+            nome = input("Digite o nome do paciente: ")
+            cadastroPaciente(nome)
 
         elif op == '2':
-            nome = input("Nome do paciente: ")
-            dia = input("Data da consulta (dd/mm): ")
-            medico = input("Nome do médico: ")
-            hospital.agendar_consulta(nome, dia, medico)
+            agendarConsulta()
 
         elif op == '3':
-            nome = input("Nome do paciente: ")
-            profissional = input("Nome do profissional de saúde: ")
-            descricao = input("Descrição do prontuário: ")
-            hospital.registrar_prontuario(nome, profissional, descricao)
+            prontuarioMedico()
 
         elif op == '4':
             nome = input("Nome do paciente: ")
@@ -108,9 +152,7 @@ if __name__ == "__main__":
         elif op == '6' or op == '7':
             emergencias_menu(hospital)
         elif op == '8':
-            nome = input("Nome do paciente: ")
-            exame = input("Exame a solicitar: ")
-            hospital.solicitar_exame(nome, exame)
+            solicitarExame()
 
         elif op == '9':
             nome = input("Nome do paciente: ")
@@ -118,7 +160,6 @@ if __name__ == "__main__":
 
         elif op == '10':
             escalonamento_menu(hospital)
-
 
         else:
             print("Opção inválida.")

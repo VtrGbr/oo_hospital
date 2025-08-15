@@ -43,7 +43,7 @@ class Hospital:
     def faturar_paciente(self, nome):
         paciente = self.encontrar_paciente(nome)
         if paciente:
-            total = len(paciente.consultas) * 100 + len(paciente.exames) * 150
+            total = len(paciente.consultas) * 10.5 + len(paciente.exames) * 10.5
             print(f"Fatura para {paciente.nome}: R$ {total:.2f}")
         else:
             print("Paciente não encontrado.")

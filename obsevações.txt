@@ -1,0 +1,6 @@
+Main:
+    - Lembrar de inserir a lógica de caso não seja encontrado um paciente e ele queira ser cadastrado, voltar para a própria função para que o processo não seja interrompido
+    principalmente nas funções de :
+        1. CadastroPaciente
+        2. ProntuarioMedico
+        3. SolicitarExame
