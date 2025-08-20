@@ -77,6 +77,22 @@ def cadastroPaciente(nome):
     cpf = input("CPF (ou Enter se não tiver): ") or None
     sus = input("Cartão SUS (ou Enter se não tiver): ") or None
     hospital.cadastrar_paciente(nome, cpf, sus)
+#Função mais robusta para cadastrar e ver os pacientes
+def cadastro():
+    print("\n--- Cadastro ---")
+    print("1 - Cadastrar paciente")
+    print("2 - Ver pacientes cadastrados")
+    print("0 - Voltar")
+    op = input("Escolha: ")
+    while op != '0':
+        if op == '1':
+            nome = input("Digite o nome do paciente: ")
+            cadastroPaciente(nome)
+        elif op == '2':
+            hospital.mostrarPaciente()
+        else:
+            print("Opção inválida.")
+        op = input("Escolha: ")
 
 #Funcao para agendamento
 def agendarConsulta():
@@ -159,8 +175,7 @@ if __name__ == "__main__":
             break
 
         elif op == '1':
-            nome = input("Digite o nome do paciente: ")
-            cadastroPaciente(nome)
+            cadastro()
 
         elif op == '2':
             agendarConsulta()

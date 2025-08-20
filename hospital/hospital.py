@@ -24,6 +24,16 @@ class Hospital:
             if p.nome.lower() == nome.lower():
                 return p
         return None
+    
+    def mostrarPaciente(self):
+        if not self.pacientes:
+            print("Nenhum paciente cadastrado")
+        i = 0
+        for paciente in self.pacientes:
+            nome = self.pacientes.pop()
+            cartao = self.pacientes.cartaoSus()
+            print(f"{i} {nome} {cpf} {cartao}")
+            i = i + 1
 
     def agendar_consulta(self, nome, dia, profissional):
         paciente = self.encontrar_paciente(nome)
