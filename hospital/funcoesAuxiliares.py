@@ -142,33 +142,84 @@ def prontuarioMedico():
 
 #Solicitação de exame
 def solicitarExame():
-    nomePaciente = input("Nome do paciente: ")
-    paciente = hospital.encontrar_paciente(nomePaciente)
+    nome_paciente = input("Nome do paciente: ")
+    paciente = hospital.encontrar_paciente(nome_paciente)
 
-    if paciente:
-        # Mostra os profissionais disponíveis
-        print("\n--- Profissionais Disponíveis ---")
-        for funcionario in hospital.funcionarios:
-            print(f"- {funcionario.nome} ({funcionario.__class__.__name__})")
-        
-        nomeProfissional = input("Nome do profissional que está solicitando: ")
-        
-        # Mostra os exames disponíveis
-        print("\n--- Exames Disponíveis (código) ---")
-        
-        for codigo, exame in EXAMES_DISPONIVEIS.items():
-            print(f"- {codigo}: {exame.nome}")
-
-        nomeExame = input("Digite o código do exame a solicitar: ").lower()
-        hospital.solicitar_exame(nomePaciente, nomeProfissional, nomeExame)
-    else:
+    if not paciente:
         print("Paciente não encontrado.")
-        # Opcional: manter a lógica de cadastro se o paciente não for encontrado
+        # Lógica opcional para cadastrar o paciente
         resposta = input("Deseja cadastrá-lo? (sim/nao) ")
         if resposta.lower() == "sim":
-            cadastroPaciente(nomePaciente)
-            solicitarExame() # Tenta novamente após o cadastro
+            cadastroPaciente(nome_paciente)
+            solicitarExame() # Tenta novamente
+        return
 
+    # 1. Escolher o profissional
+    print("\n--- Profissionais Disponíveis ---")
+    for func in hospital.funcionarios:
+        print(f"- {func.nome} ({func.__class__.__name__})")
+    
+    nome_profissional = input("Nome do profissional que está solicitando: ")
+
+    # 2. Encontrar o objeto do profissional
+    profissional_encontrado = None
+    for func in hospital.funcionarios:
+        if func.nome.lower() == nome_profissional.lower():
+            profissional_encontrado = func
+            break
+    
+    if not profissional_encontrado:
+        print(f"Profissional '{nome_profissional}' não encontrado.")
+        return
+
+    # 3. Mostrar apenas os exames permitidos para esse profissional
+    print(f"\n--- Exames que {profissional_encontrado.nome} pode solicitar ---")
+    
+    # Importa o dicionário de exames
+    from entidades.exame import EXAMES_DISPONIVEIS 
+    
+    # Verifica se o profissional tem exames permitidos
+    if not profissional_encontrado.exames_permitidos:
+        print("Este profissional não solicita exames.")
+        return
+
+    # Itera sobre a lista de exames permitidos do profissional
+    for codigo_exame in profissional_encontrado.exames_permitidos:
+        # Pega o nome completo do exame do dicionário principal
+        exame_obj = EXAMES_DISPONIVEIS.get(codigo_exame)
+        if exame_obj:
+            print(f"- {codigo_exame}: {exame_obj.nome}")
+
+    # 4. Solicitar o exame
+    codigo_selecionado = input("Digite o código do exame a solicitar: ").lower()
+    
+    # Chama a função do hospital, que aplicará o polimorfismo
+    hospital.solicitar_exame(nome_paciente, nome_profissional, codigo_selecionado)
+
+'''
+# 3. Mostrar apenas os exames permitidos para esse profissional
+    print(f"\n--- Exames que {profissional_encontrado.nome} pode solicitar ---")
+    
+    # Importa o dicionário de exames
+    from entidades.exame import EXAMES_DISPONIVEIS 
+    
+    # Verifica se o profissional tem exames permitidos
+    if not profissional_encontrado.exames_permitidos:
+        print("Este profissional não solicita exames.")
+        return
+
+    # Itera sobre a lista de exames permitidos do profissional
+    for codigo_exame in profissional_encontrado.exames_permitidos:
+        # Pega o nome completo do exame do dicionário principal
+        exame_obj = EXAMES_DISPONIVEIS.get(codigo_exame)
+        if exame_obj:
+            print(f"- {codigo_exame}: {exame_obj.nome}")
+
+    # 4. Solicitar o exame
+    codigo_selecionado = input("Digite o código do exame a solicitar: ").lower()
+    
+    # Chama a função do hospital, que aplicará o polimorfismo
+    hospital.solicitar_exame(nome_paciente, nome_profissional, codigo_selecionado)'''
 def queixa():
     print("\n--- Registro de queixas ---")
     print("1 - Registrar queixa")

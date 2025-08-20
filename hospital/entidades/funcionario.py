@@ -7,6 +7,7 @@ class FuncionarioSaude(ABC):
         self.nome = nome
         self.registro = registro
         self.exames_permitidos = [] # Cada filho definirá seus exames
+        #espaço para implementar queixa para cada funcionario
 
     @abstractmethod
     def requisitarExame(self, paciente, nome_exame):
@@ -28,7 +29,7 @@ class Medico(FuncionarioSaude):
         super().__init__(nome, registro)
         self.especialidade = especialidade
         # Define os exames que o médico pode solicitar
-        self.exames_permitidos = ["hemograma", "raio-x", "urina"]
+        self.exames_permitidos = ["hemograma", "raio-x", "urina","tomografia"]
 
     def atenderPaciente(self, paciente):
         print(f"O médico {self.nome} está diagnosticando o paciente: {paciente.nome}")
@@ -63,7 +64,7 @@ class Enfermeiro(FuncionarioSaude):
 class Dentista(FuncionarioSaude):
     def __init__(self, nome, registro):
         super().__init__(nome, registro)
-        self.exames_permitidos = ["radiografia_dentaria", "limpeza"]
+        self.exames_permitidos = ["radiografia_dentaria", "limpeza","tomografia"]
 
     def atenderPaciente(self, paciente):
         print(f"A dentista {self.nome} está fazendo uma análise bucal no paciente: {paciente.nome}")
