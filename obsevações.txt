@@ -13,3 +13,5 @@ Main:
     Fazer um dicionario para os funcionarios e ir adicionando eles ( pode ser nativo mesmo)
 
     "Exame" pode ser alguma estrutura que tenha a maioria dos exames que médicos, enfermeiros e dentistas requesitam
+
+    Lembrar de criar um ambiente virtual e instalar "pip install fpdf2" para poder gerar o arquivo em pdf

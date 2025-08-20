@@ -3,6 +3,7 @@ from entidades.estoque import Estoque
 from entidades.administrativo import SetorAdministrativo
 from entidades.emergencia import EmergenciaManager
 from entidades.funcionario import Medico, Enfermeiro, Dentista, Psicologo
+from .gerarPdf import gerar_relatorio_paciente, gerar_relatorio_equipe, gerar_relatorio_hospital
 
 PRECO = 10.5 #Valor estipulado de maneira avulsa
 class Hospital:
@@ -160,3 +161,17 @@ class Hospital:
         else:
             for nome, turno in self.escalonamento.items():
                 print(f"{nome}: {turno}")
+
+    #PDF
+    def gerar_pdf_paciente(self, nome_paciente):
+        paciente = self.encontrar_paciente(nome_paciente)
+        if paciente:
+            gerar_relatorio_paciente(paciente)
+        else:
+            print("Paciente não encontrado.")
+
+    def gerar_pdf_equipe(self):
+        gerar_relatorio_equipe(self.funcionarios)
+    
+    def gerar_pdf_hospital(self):
+        gerar_relatorio_hospital(self)

@@ -42,6 +42,8 @@ if __name__ == "__main__":
             funcoesAuxiliares.escalonamento_menu(hospital)
         elif op == '11':
             funcoesAuxiliares.queixa()
+        elif op == '12':
+            funcoesAuxiliares.relatorios_menu(hospital)
         else:
             print("Opção inválida.")
            

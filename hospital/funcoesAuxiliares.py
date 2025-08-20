@@ -196,30 +196,6 @@ def solicitarExame():
     # Chama a função do hospital, que aplicará o polimorfismo
     hospital.solicitar_exame(nome_paciente, nome_profissional, codigo_selecionado)
 
-'''
-# 3. Mostrar apenas os exames permitidos para esse profissional
-    print(f"\n--- Exames que {profissional_encontrado.nome} pode solicitar ---")
-    
-    # Importa o dicionário de exames
-    from entidades.exame import EXAMES_DISPONIVEIS 
-    
-    # Verifica se o profissional tem exames permitidos
-    if not profissional_encontrado.exames_permitidos:
-        print("Este profissional não solicita exames.")
-        return
-
-    # Itera sobre a lista de exames permitidos do profissional
-    for codigo_exame in profissional_encontrado.exames_permitidos:
-        # Pega o nome completo do exame do dicionário principal
-        exame_obj = EXAMES_DISPONIVEIS.get(codigo_exame)
-        if exame_obj:
-            print(f"- {codigo_exame}: {exame_obj.nome}")
-
-    # 4. Solicitar o exame
-    codigo_selecionado = input("Digite o código do exame a solicitar: ").lower()
-    
-    # Chama a função do hospital, que aplicará o polimorfismo
-    hospital.solicitar_exame(nome_paciente, nome_profissional, codigo_selecionado)'''
 def queixa():
     print("\n--- Registro de queixas ---")
     print("1 - Registrar queixa")
@@ -236,5 +212,28 @@ def queixa():
             hospital.administrativo.exibir_queixas()
         else: 
             print("Opcao inválida!")
+        print()
+        op = input("Escolha: ")
+
+def relatorios_menu(hospital):
+    print("\n--- GERAÇÃO DE RELATÓRIOS ---")
+    print("1 - Relatório de Paciente")
+    print("2 - Relatório da Equipe de Saúde") # Texto da opção alterado
+    print("3 - Relatório Geral do Hospital")
+    print("0 - Voltar")
+    op = input("Escolha: ")
+    while op != '0':
+        if op == '1':
+            nome = input("Nome do paciente: ")
+            hospital.gerar_pdf_paciente(nome)
+        # --- CHAMADA MODIFICADA ---
+        elif op == '2':
+            # Não precisa mais pedir o nome, chama a função da equipe diretamente
+            hospital.gerar_pdf_equipe()
+        elif op == '3':
+            hospital.gerar_pdf_hospital()
+        else:
+            print("Opção inválida.")
+        
         print()
         op = input("Escolha: ")
