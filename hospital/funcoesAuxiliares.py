@@ -1,5 +1,5 @@
 from hospital import Hospital
-
+from entidades.exame import EXAMES_DISPONIVEIS
 hospital = Hospital()
 
 def menu():
@@ -78,6 +78,9 @@ def cadastroPaciente(nome):
     cpf = input("CPF (ou Enter se não tiver): ") or None
     sus = input("Cartão SUS (ou Enter se não tiver): ") or None
     hospital.cadastrar_paciente(nome, cpf, sus)
+
+
+
 #Função mais robusta para cadastrar e ver os pacientes
 def cadastro():
     print("\n--- Cadastro ---")
@@ -100,22 +103,25 @@ def cadastro():
             print("Opção inválida.")
         op = input("Escolha: ")
 
+
+#Funcao para agendamento
 #Funcao para agendamento
 def agendarConsulta():
     nome = input("Nome do paciente: ")
     paciente = hospital.encontrar_paciente(nome)
     if paciente:
         dia = input("Data da consulta (dd/mm): ")
-        medico = input("Nome do médico: ")
-        hospital.agendar_consulta(nome, dia, medico)
+        # Peça o tipo de profissional
+        tipo_profissional = input("Tipo de profissional (Medico, Dentista, etc.): ")
+        hospital.agendar_consulta(nome, dia, tipo_profissional)
     else:
-        print("Paciente não encotrado.")
+        print("Paciente não encontrado.")
         resposta = input("Deseja cadastra-lo? ")
         if resposta.lower() == "sim":
             cadastroPaciente(nome)
             dia = input("Data da consulta (dd/mm): ")
-            medico = input("Nome do médico: ")
-            hospital.agendar_consulta(nome, dia, medico)
+            tipo_profissional = input("Tipo de profissional (Medico, Dentista, etc.): ")
+            hospital.agendar_consulta(nome, dia, tipo_profissional)
         
 #Função para prontuario
 def prontuarioMedico():
@@ -136,19 +142,32 @@ def prontuarioMedico():
 
 #Solicitação de exame
 def solicitarExame():
-    nome = input("Nome do paciente: ")
-    paciente = hospital.encontrar_paciente(nome)
+    nomePaciente = input("Nome do paciente: ")
+    paciente = hospital.encontrar_paciente(nomePaciente)
 
     if paciente:
-        exame = input("Exame a solicitar: ")
-        hospital.solicitar_exame(nome, exame)
+        # Mostra os profissionais disponíveis
+        print("\n--- Profissionais Disponíveis ---")
+        for funcionario in hospital.funcionarios:
+            print(f"- {funcionario.nome} ({funcionario.__class__.__name__})")
+        
+        nomeProfissional = input("Nome do profissional que está solicitando: ")
+        
+        # Mostra os exames disponíveis
+        print("\n--- Exames Disponíveis (código) ---")
+        
+        for codigo, exame in EXAMES_DISPONIVEIS.items():
+            print(f"- {codigo}: {exame.nome}")
+
+        nomeExame = input("Digite o código do exame a solicitar: ").lower()
+        hospital.solicitar_exame(nomePaciente, nomeProfissional, nomeExame)
     else:
-        print("Paciente não encontrado")
-        resposta = input("Deseja cadastrá-lo? ")
+        print("Paciente não encontrado.")
+        # Opcional: manter a lógica de cadastro se o paciente não for encontrado
+        resposta = input("Deseja cadastrá-lo? (sim/nao) ")
         if resposta.lower() == "sim":
-            cadastroPaciente(nome)
-            exame = input("Exame a solicitar: ")
-            hospital.solicitar_exame(nome, exame)
+            cadastroPaciente(nomePaciente)
+            solicitarExame() # Tenta novamente após o cadastro
 
 def queixa():
     print("\n--- Registro de queixas ---")

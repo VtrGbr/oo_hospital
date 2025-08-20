@@ -29,8 +29,8 @@ class Paciente:
     def solicitar_exame(self, exame):
         self.exames.append(exame)
 
-    def agendar_consulta(self, dia, medico):
-        self.consultas.append((dia, medico))
+    def agendar_consulta(self, dia, profissional):
+        self.consultas.append((dia, profissional))
 
     def __str__(self):
         return f"Paciente: {self.nome}"

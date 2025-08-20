@@ -2,12 +2,18 @@ from entidades.paciente import Paciente
 from entidades.estoque import Estoque
 from entidades.administrativo import SetorAdministrativo
 from entidades.emergencia import EmergenciaManager
+from entidades.funcionario import Medico, Enfermeiro, Dentista, Psicologo
 
-PRECO = 10.5
+PRECO = 10.5 #Valor estipulado de maneira avulsa
 class Hospital:
     def __init__(self):
         self.pacientes = []
-        self.funcionarios = [] #chamar a classe funcionario
+        self.funcionarios = [
+            Medico("Ricardo", "CRM-123", "Cardiologista"),
+            Enfermeiro("Lucas", "COREN-456"),
+            Dentista("Aurora", "CRO-789"),
+            Psicologo("Talhya", "CRP-101")
+        ]
         self.leitos = []
         self.escalonamento = {}
         self.estoque = Estoque()
@@ -36,7 +42,7 @@ class Hospital:
             cpf = paciente.cpf if paciente.cpf else "Não informado"
             cartao_sus = paciente.cartao_sus if paciente.cartao_sus else "Não informado"
             print(f"{i}: Nome: {nome}, CPF: {cpf}, Cartão SUS: {cartao_sus}")
-            
+
     def mostrarPaciente(self, nome):
         paciente = self.encontrar_paciente(nome)
         if paciente:
@@ -74,13 +80,30 @@ class Hospital:
         else:
             print("Paciente não encontrado.")
 
-    def agendar_consulta(self, nome, dia, profissional):
-        paciente = self.encontrar_paciente(nome)
-        if paciente:
-            paciente.agendar_consulta(dia, profissional)
-            print("Consulta agendada.")
-        else:
+    def agendar_consulta(self, nome_paciente, dia, tipo_profissional):
+        paciente = self.encontrar_paciente(nome_paciente)
+        if not paciente:
             print("Paciente não encontrado.")
+            return
+
+        profissional_encontrado = None
+        # Polimorfismo em ação: procuramos por um objeto que seja da classe desejada
+        # (ex: Medico, Dentista)
+        for funcionario in self.funcionarios:
+            if funcionario.__class__.__name__.lower() == tipo_profissional.lower():
+                profissional_encontrado = funcionario
+                break # Encontramos o profissional, podemos parar o loop
+
+        if profissional_encontrado:
+            # Usamos o nome do objeto encontrado para agendar
+            paciente.agendar_consulta(dia, profissional_encontrado.nome)
+            print(f"Consulta agendada para {paciente.nome} com {tipo_profissional} {profissional_encontrado.nome} no dia {dia}.")
+            # Exemplo de polimorfismo: chamar o método do profissional encontrado
+            profissional_encontrado.atenderPaciente(paciente)
+        else:
+            print(f"Não foi encontrado um profissional do tipo '{tipo_profissional}' disponível.")
+
+
 
     def registrar_prontuario(self, nome, profissional, descricao):
         paciente = self.encontrar_paciente(nome)
@@ -98,13 +121,25 @@ class Hospital:
         else:
             print("Paciente não encontrado.")
 
-    def solicitar_exame(self, nome, exame):
-        paciente = self.encontrar_paciente(nome)
-        if paciente:
-            paciente.solicitar_exame(exame)
-            print("Exame solicitado.")
-        else:
+    def solicitar_exame(self, nomePaciente, nomeProfissional, nomeExame):
+        paciente = self.encontrar_paciente(nomePaciente)
+        if not paciente:
             print("Paciente não encontrado.")
+            return
+
+        profissional = None
+        for funcionario in self.funcionarios:
+            if funcionario.nome.lower() == nomeProfissional.lower():
+                profissional = funcionario
+                break
+        
+        if not profissional:
+            print(f"Profissional {nomeProfissional} não encontrado.")
+            return
+
+        # Polimorfismo: O hospital não sabe os detalhes, apenas
+        # manda o objeto profissional requisitar o exame.
+        profissional.requisitarExame(paciente, nomeExame)
 
     def alocar_leito(self, nome):
         paciente = self.encontrar_paciente(nome)
