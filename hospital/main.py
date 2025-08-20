@@ -82,6 +82,7 @@ def cadastro():
     print("\n--- Cadastro ---")
     print("1 - Cadastrar paciente")
     print("2 - Ver pacientes cadastrados")
+    print("3 - Dados de um paciente")
     print("0 - Voltar")
     op = input("Escolha: ")
     while op != '0':
@@ -89,7 +90,11 @@ def cadastro():
             nome = input("Digite o nome do paciente: ")
             cadastroPaciente(nome)
         elif op == '2':
-            hospital.mostrarPaciente()
+
+            hospital.listarPacientes()
+        elif op == '3':
+            nome = input("Digite o nome do paciente: ")
+            hospital.mostrarPaciente(nome)
         else:
             print("Opção inválida.")
         op = input("Escolha: ")

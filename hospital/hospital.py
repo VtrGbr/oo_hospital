@@ -25,15 +25,54 @@ class Hospital:
                 return p
         return None
     
-    def mostrarPaciente(self):
+    def listarPacientes(self):
         if not self.pacientes:
-            print("Nenhum paciente cadastrado")
-        i = 0
-        for paciente in self.pacientes:
-            nome = self.pacientes.pop()
-            cartao = self.pacientes.cartaoSus()
-            print(f"{i} {nome} {cpf} {cartao}")
-            i = i + 1
+            print("Nenhum paciente cadastrado.")
+            return  # Retorna para sair da função se não houver pacientes
+
+        print("\n--- Lista de Pacientes ---")
+        for i, paciente in enumerate(self.pacientes, 1):
+            nome = paciente.nome
+            cpf = paciente.cpf if paciente.cpf else "Não informado"
+            cartao_sus = paciente.cartao_sus if paciente.cartao_sus else "Não informado"
+            print(f"{i}: Nome: {nome}, CPF: {cpf}, Cartão SUS: {cartao_sus}")
+            
+    def mostrarPaciente(self, nome):
+        paciente = self.encontrar_paciente(nome)
+        if paciente:
+            print(f"\n--- Detalhes do Paciente: {paciente.nome} ---")
+            print(f"CPF: {paciente.cpf if paciente.cpf else 'Não informado'}")
+            print(f"Cartão SUS: {paciente.cartao_sus if paciente.cartao_sus else 'Não informado'}")
+            
+            print("\n--- Prontuários ---")
+            if paciente.prontuarios:
+                for prontuario in paciente.prontuarios:
+                    print(prontuario)
+            else:
+                print("Nenhum prontuário registrado.")
+
+            print("\n--- Receitas ---")
+            if paciente.receitas:
+                for i, receita in enumerate(paciente.receitas, 1):
+                    print(f"{i}: {receita}")
+            else:
+                print("Nenhuma receita registrada.")
+
+            print("\n--- Exames Solicitados ---")
+            if paciente.exames:
+                for i, exame in enumerate(paciente.exames, 1):
+                    print(f"{i}: {exame}")
+            else:
+                print("Nenhum exame solicitado.")
+
+            print("\n--- Consultas Agendadas ---")
+            if paciente.consultas:
+                for i, (dia, medico) in enumerate(paciente.consultas, 1):
+                    print(f"{i}: Dia {dia} com Dr(a). {medico}")
+            else:
+                print("Nenhuma consulta agendada.")
+        else:
+            print("Paciente não encontrado.")
 
     def agendar_consulta(self, nome, dia, profissional):
         paciente = self.encontrar_paciente(nome)
