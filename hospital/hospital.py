@@ -10,10 +10,10 @@ class Hospital:
     def __init__(self):
         self.pacientes = []
         self.funcionarios = [
-            Medico("Ricardo", "CRM-123", "Cardiologista"),
-            Enfermeiro("Lucas", "COREN-456"),
-            Dentista("Aurora", "CRO-789"),
-            Psicologo("Talhya", "CRP-101")
+            Medico("Saulo de Tarso", "CRM-123", "Cardiologista"),
+            Enfermeiro("Agostinho de Hipona", "COREN-456"),
+            Dentista("Aurora Vieira", "CRO-789"),
+            Psicologo("Madalena", "CRP-101")
         ] #Funcionarios pre-estabelecidos
         self.leitos = []
         self.escalonamento = {}
@@ -161,7 +161,7 @@ class Hospital:
             print("Paciente não encontrado.")
 
     def escalonar_funcionario(self, nome, turno):
-        self.escalonamento[nome] = turno
+        self.escalonamento[nome ] = turno
         print(f"{nome} escalado para o turno {turno}.")
 
     def ver_escalonamento(self):

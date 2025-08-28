@@ -94,8 +94,11 @@ def cadastro():
         if op == '1':
             nome = input("Digite o nome do paciente: ")
             cadastroPaciente(nome)
+            '''cadastroPaciente("Vitor Gabriel")
+            cadastroPaciente("Davi Celestino")
+            cadastroPaciente("João Tenório")
+            cadastroPaciente("Humberto")'''     
         elif op == '2':
-
             hospital.listarPacientes()
         elif op == '3':
             nome = input("Digite o nome do paciente: ")
@@ -109,6 +112,7 @@ def cadastro():
 
 def agendarConsulta():
     nome = input("Nome do paciente: ")
+    #nome = "Vitor Gabriel"
     paciente = hospital.encontrar_paciente(nome)
     if paciente:
         dia = input("Data da consulta (dd/mm): ")
@@ -126,7 +130,8 @@ def agendarConsulta():
         
 #Função para prontuario
 def prontuarioMedico():
-    nome = input("Nome do paciente: ")
+    nome = input("Digite o nome do paciente: ")
+    #nome = "Davi Celestino"
     paciente = hospital.encontrar_paciente(nome)
     if paciente:
         profissional = input("Nome do profissional de saúde: ")
@@ -144,6 +149,7 @@ def prontuarioMedico():
 #Solicitação de exame
 def solicitarExame():
     nome_paciente = input("Nome do paciente: ")
+    #nome_paciente = "João Tenório"
     paciente = hospital.encontrar_paciente(nome_paciente)
 
     if not paciente:
@@ -161,6 +167,7 @@ def solicitarExame():
         print(f"- {func.nome} ({func.__class__.__name__})")
     
     nome_profissional = input("Nome do profissional que está solicitando: ")
+    #nome_profissional = "Aurora"
 
     # 2. Encontrar o objeto do profissional
     profissional_encontrado = None
@@ -193,6 +200,7 @@ def solicitarExame():
 
     # 4. Solicitar o exame
     codigo_selecionado = input("Digite o código do exame a solicitar: ").lower()
+    #codigo_selecionado = "limpeza"
     
     # Chama a função do hospital, que aplicará o polimorfismo
     hospital.solicitar_exame(nome_paciente, nome_profissional, codigo_selecionado)
