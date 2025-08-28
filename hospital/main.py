@@ -1,4 +1,5 @@
 from hospital import Hospital
+#import gerarPdf
 import funcoesAuxiliares
 hospital = Hospital()
 
@@ -43,7 +44,8 @@ if __name__ == "__main__":
         elif op == '11':
             funcoesAuxiliares.queixa()
         elif op == '12':
-            funcoesAuxiliares.relatorios_menu(hospital)
+            #funcoesAuxiliares.relatorios_menu(hospital)
+            pass
         else:
             print("Opção inválida.")
            

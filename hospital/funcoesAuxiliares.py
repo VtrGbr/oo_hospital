@@ -216,7 +216,7 @@ def queixa():
         print()
         op = input("Escolha: ")
 
-def relatorios_menu(hospital):
+'''def relatorios_menu(hospital):
     print("\n--- GERAÇÃO DE RELATÓRIOS ---")
     print("1 - Relatório de Paciente")
     print("2 - Relatório da Equipe de Saúde") # Texto da opção alterado
@@ -237,4 +237,4 @@ def relatorios_menu(hospital):
             print("Opção inválida.")
         
         print()
-        op = input("Escolha: ")
+        op = input("Escolha: ")'''

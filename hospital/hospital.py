@@ -3,7 +3,7 @@ from entidades.estoque import Estoque
 from entidades.administrativo import SetorAdministrativo
 from entidades.emergencia import EmergenciaManager
 from entidades.funcionario import Medico, Enfermeiro, Dentista, Psicologo
-from .gerarPdf import gerar_relatorio_paciente, gerar_relatorio_equipe, gerar_relatorio_hospital
+#from .gerarPdf import gerar_relatorio_paciente, gerar_relatorio_equipe, gerar_relatorio_hospital
 
 PRECO = 10.5 #Valor estipulado de maneira avulsa
 class Hospital:
@@ -98,7 +98,7 @@ class Hospital:
         for funcionario in self.funcionarios:
             #Aqui não precisamos saber exatamente o tipo de profissional buscado, 
             # apenas comparamos o nome da classe com o tipo de profissional solicitado
-            
+
             if funcionario.__class__.__name__.lower() == tipo_profissional.lower():
                 profissional_encontrado = funcionario
                 break # Encontramos o profissional, podemos parar o loop
@@ -171,7 +171,7 @@ class Hospital:
             for nome, turno in self.escalonamento.items():
                 print(f"{nome}: {turno}")
 
-    #PDF
+    '''#PDF
     def gerar_pdf_paciente(self, nome_paciente):
         paciente = self.encontrar_paciente(nome_paciente)
         if paciente:
@@ -184,3 +184,4 @@ class Hospital:
     
     def gerar_pdf_hospital(self):
         gerar_relatorio_hospital(self)
+'''

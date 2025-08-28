@@ -1,4 +1,4 @@
-from fpdf import FPDF
+'''from fpdf import FPDF
 
 class PDF(FPDF):
     def header(self):
@@ -111,4 +111,4 @@ def gerar_relatorio_hospital(hospital):
 
     nome_arquivo = "relatorio_geral_hospital.pdf"
     pdf.output(nome_arquivo)
-    print(f"Relatório geral do hospital salvo em: {nome_arquivo}")
+    print(f"Relatório geral do hospital salvo em: {nome_arquivo}")'''
