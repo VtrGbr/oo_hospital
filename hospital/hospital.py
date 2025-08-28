@@ -14,7 +14,7 @@ class Hospital:
             Enfermeiro("Lucas", "COREN-456"),
             Dentista("Aurora", "CRO-789"),
             Psicologo("Talhya", "CRP-101")
-        ]
+        ] #Funcionarios pre-estabelecidos
         self.leitos = []
         self.escalonamento = {}
         self.estoque = Estoque()
@@ -81,21 +81,29 @@ class Hospital:
         else:
             print("Paciente não encontrado.")
 
+    '''Nesta função é onde implementamos o polimorfismo:
+        - Cada profissional da saúde tem o seu "jeito" de atender o paciente
+        - Então usamos o polimorfismo para que o profissional desejado atenda o paciente
+    '''
     def agendar_consulta(self, nome_paciente, dia, tipo_profissional):
         paciente = self.encontrar_paciente(nome_paciente)
         if not paciente:
             print("Paciente não encontrado.")
             return
 
-        profissional_encontrado = None
+        profissional_encontrado = None #Inicialmente nenhum profissional é encontrado
         # Polimorfismo em ação: procuramos por um objeto que seja da classe desejada
         # (ex: Medico, Dentista)
+
         for funcionario in self.funcionarios:
+            #Aqui não precisamos saber exatamente o tipo de profissional buscado, 
+            # apenas comparamos o nome da classe com o tipo de profissional solicitado
+            
             if funcionario.__class__.__name__.lower() == tipo_profissional.lower():
                 profissional_encontrado = funcionario
                 break # Encontramos o profissional, podemos parar o loop
 
-        if profissional_encontrado:
+        if profissional_encontrado: #Encontramos o profissional que queremos
             # Usamos o nome do objeto encontrado para agendar
             paciente.agendar_consulta(dia, profissional_encontrado.nome)
             print(f"Consulta agendada para {paciente.nome} com {tipo_profissional} {profissional_encontrado.nome} no dia {dia}.")
@@ -122,6 +130,7 @@ class Hospital:
         else:
             print("Paciente não encontrado.")
 
+    #Contem polimorfismo
     def solicitar_exame(self, nomePaciente, nomeProfissional, nomeExame):
         paciente = self.encontrar_paciente(nomePaciente)
         if not paciente:
@@ -129,7 +138,7 @@ class Hospital:
             return
 
         profissional = None
-        for funcionario in self.funcionarios:
+        for funcionario in self.funcionarios: #Procuramos o profissional
             if funcionario.nome.lower() == nomeProfissional.lower():
                 profissional = funcionario
                 break

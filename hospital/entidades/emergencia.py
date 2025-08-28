@@ -10,6 +10,6 @@ class EmergenciaManager:
             print("Nenhuma emergência.")
             return
         prioridades = {"alta": 1, "média": 2, "baixa": 3}
-        ordenadas = sorted(self.emergencias, key=lambda x: prioridades.get(x[1], 4))
+        ordenadas = sorted(self.emergencias, key=lambda x: prioridades.get(x[1], 4)) #o 4 aqui serve para caso seja colocado uma prioridade desconhecida ele coloca em ultimo lugar
         for nome, prioridade in ordenadas:
             print(f"{nome} - prioridade: {prioridade}")

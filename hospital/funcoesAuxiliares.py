@@ -17,7 +17,8 @@ def menu():
     print("11 - Queixas")
     print("0  - Sair")
 
-''' Funções para facilitar na main'''
+''' --- Funções para facilitar na main --- '''
+
 def estoque_menu(hospital):
     print("\n--- ESTOQUE ---")
     print("1 - Adicionar item")
@@ -105,7 +106,7 @@ def cadastro():
 
 
 #Funcao para agendamento
-#Funcao para agendamento
+
 def agendarConsulta():
     nome = input("Nome do paciente: ")
     paciente = hospital.encontrar_paciente(nome)
@@ -176,7 +177,7 @@ def solicitarExame():
     print(f"\n--- Exames que {profissional_encontrado.nome} pode solicitar ---")
     
     # Importa o dicionário de exames
-    from entidades.exame import EXAMES_DISPONIVEIS 
+    #from entidades.exame import EXAMES_DISPONIVEIS 
     
     # Verifica se o profissional tem exames permitidos
     if not profissional_encontrado.exames_permitidos:
