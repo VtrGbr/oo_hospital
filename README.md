@@ -130,10 +130,13 @@ O projeto foi estruturado utilizando os seguintes objetos principais:
     ```bash
     pip install fpdf2
     ```
+    Por enquanto a função de gerar pdf não vai ser implementada por motivos técnicos de erro constante
 3.  **Execute o programa:**
     ```bash
     python hospital/main.py
     ```
+
+
 
 ## Funcionalidades Futuras
 
