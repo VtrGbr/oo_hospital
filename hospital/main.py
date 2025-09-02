@@ -1,12 +1,15 @@
 from hospital import Hospital
 #import gerarPdf
 import funcoesAuxiliares
+#import apresentacao
 hospital = Hospital()
+
 
 # --- Execução principal ---
 if __name__ == "__main__":
     #hospital = Hospital()
     while True:
+        
         funcoesAuxiliares.menu()
         op = input("Escolha uma opção: ")
 

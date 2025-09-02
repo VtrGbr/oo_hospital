@@ -10,7 +10,7 @@ def menu():
     print("4  - Gerar fatura")
     print("5  - Gerenciar estoque")
     print("6  - Registrar emergência")
-    print("7  - Ver emergências")
+    print("7  - Emergências")
     print("8  - Solicitar exame")
     print("9  - Alocar leito")
     print("10 - Escalonamento de funcionários")
@@ -46,7 +46,7 @@ def emergencias_menu(hospital):
     while op != '0':
         if op == '1':
             nome = input("Nome do paciente: ")
-            prioridade = input("Prioridade (alta/média/baixa): ").lower()
+            prioridade = input("Prioridade (alta/media/baixa): ").lower()
             hospital.emergencias.registrar_emergencia(nome, prioridade)
         elif op == '2':
             hospital.emergencias.ver_emergencias()
@@ -75,10 +75,47 @@ def escalonamento_menu(hospital):
 
 
 #funcao para cadastro
+
 def cadastroPaciente(nome):
-    cpf = input("CPF (ou Enter se não tiver): ") or None
-    sus = input("Cartão SUS (ou Enter se não tiver): ") or None
-    hospital.cadastrar_paciente(nome, cpf, sus)
+    # Primeiro, cadastra o paciente apenas com o nome. 
+    hospital.cadastrar_paciente(nome)
+    
+    # Agora, encontramos o paciente que acabamos de criar para adicionar os outros dados
+    paciente = hospital.encontrar_paciente(nome)
+
+    if not paciente:
+        print("Erro: Paciente recém-criado não encontrado.")
+        return
+
+    # Loop para solicitar e validar o CPF
+    while True:
+        cpf_input = input("CPF (5 dígitos, ou Enter para pular): ").strip()
+        if not cpf_input:
+            break  # Sai do loop se o usuário não digitar nada
+
+        # Atribui o valor ao atributo. O setter da classe Paciente fará a validação.
+        paciente.cpf = cpf_input
+        
+        # Se o CPF não for None, significa que a validação no setter foi bem-sucedida
+        if paciente.cpf is not None:
+            print("CPF válido e registrado.")
+            break # Sai do loop
+        # Caso contrário, o setter já exibiu a mensagem de erro, e o loop continua
+
+    # Loop para solicitar e validar o Cartão SUS
+    while True:
+        sus_input = input("Cartão SUS (5 dígitos, ou Enter para pular): ").strip()
+        if not sus_input:
+            break # Sai do loop se o usuário não digitar nada
+
+        # Atribui o valor para que o setter faça a validação
+        paciente.cartao_sus = sus_input
+        
+        # Se o Cartão SUS não for None, a validação foi um sucesso
+        if paciente.cartao_sus is not None:
+            print("Cartão SUS válido e registrado.")
+            break # Sai do loop
+        # Caso contrário, a mensagem de erro já foi exibida, e o loop pedirá o dado novamente
 
 
 

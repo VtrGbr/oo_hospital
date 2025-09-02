@@ -20,5 +20,5 @@ EXAMES_DISPONIVEIS = {
     "glicemia": Exame("Teste de Glicemia Capilar"),
     "pressao": Exame("Aferição de Pressão Arterial"),
     # Psicólogo (não solicita exames, mas encaminha)
-    "encaminhamento_psiquiatra": Exame("Encaminhamento para Psiquiatra")
+    "encaminhamento": Exame("Encaminhamento para Psiquiatra")
 }

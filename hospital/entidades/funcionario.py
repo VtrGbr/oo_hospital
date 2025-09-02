@@ -80,7 +80,7 @@ class Dentista(FuncionarioSaude):
 class Psicologo(FuncionarioSaude):
     def __init__(self, nome, registro):
         super().__init__(nome, registro)
-        self.exames_permitidos = ["encaminhamento_psiquiatra"]
+        self.exames_permitidos = ["encaminhamento"]
     
     def atenderPaciente(self, paciente):
         print(f"A psicóloga {self.nome} está realizando uma sessão de terapia com o paciente {paciente.nome}")

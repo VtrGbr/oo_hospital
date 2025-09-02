@@ -85,6 +85,7 @@ class Hospital:
         - Cada profissional da saúde tem o seu "jeito" de atender o paciente
         - Então usamos o polimorfismo para que o profissional desejado atenda o paciente
     '''
+    #Contem polimorfismo
     def agendar_consulta(self, nome_paciente, dia, tipo_profissional):
         paciente = self.encontrar_paciente(nome_paciente)
         if not paciente:
